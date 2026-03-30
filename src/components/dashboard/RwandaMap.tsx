@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { provinces } from "@/data/rwandaData";
+import rwandaMapImg from "@/assets/rwanda-map.jpg";
 
 interface RwandaMapProps {
   selectedDistrict: string;
@@ -7,7 +7,6 @@ interface RwandaMapProps {
   onDistrictSelect: (district: string, province: string) => void;
 }
 
-// Simplified Rwanda district map paths (stylized polygons for each district)
 const districtPaths: Record<string, { path: string; cx: number; cy: number; province: string }> = {
   // Kigali City
   Gasabo: { path: "M 230 200 L 255 185 L 275 195 L 270 220 L 245 225 Z", cx: 253, cy: 205, province: "Kigali City" },
@@ -50,14 +49,6 @@ const districtPaths: Record<string, { path: string; cx: number; cy: number; prov
   Rutsiro: { path: "M 105 165 L 130 155 L 145 175 L 140 205 L 110 215 L 100 195 Z", cx: 122, cy: 185, province: "Western" },
 };
 
-const provinceColors: Record<string, { fill: string; hover: string; active: string }> = {
-  "Kigali City": { fill: "hsl(152, 58%, 85%)", hover: "hsl(152, 58%, 75%)", active: "hsl(152, 58%, 45%)" },
-  Northern: { fill: "hsl(205, 70%, 88%)", hover: "hsl(205, 70%, 78%)", active: "hsl(205, 70%, 50%)" },
-  Southern: { fill: "hsl(38, 92%, 88%)", hover: "hsl(38, 92%, 78%)", active: "hsl(38, 92%, 55%)" },
-  Eastern: { fill: "hsl(280, 50%, 88%)", hover: "hsl(280, 50%, 78%)", active: "hsl(280, 50%, 55%)" },
-  Western: { fill: "hsl(0, 72%, 90%)", hover: "hsl(0, 72%, 80%)", active: "hsl(0, 72%, 55%)" },
-};
-
 export default function RwandaMap({ selectedDistrict, selectedProvince, onDistrictSelect }: RwandaMapProps) {
   const [hoveredDistrict, setHoveredDistrict] = useState<string | null>(null);
 
@@ -66,9 +57,9 @@ export default function RwandaMap({ selectedDistrict, selectedProvince, onDistri
       <div className="flex items-center justify-between">
         <h3 className="font-display font-semibold text-foreground">Interactive Map</h3>
         <div className="flex items-center gap-3 flex-wrap">
-          {Object.entries(provinceColors).map(([name, colors]) => (
+          {["Kigali City", "Northern", "Southern", "Eastern", "Western"].map((name) => (
             <div key={name} className="flex items-center gap-1.5">
-              <div className="w-2.5 h-2.5 rounded-full" style={{ background: colors.active }} />
+              <div className="w-2 h-2 rounded-full bg-primary/60" />
               <span className="text-xs text-muted-foreground">{name}</span>
             </div>
           ))}
@@ -78,11 +69,21 @@ export default function RwandaMap({ selectedDistrict, selectedProvince, onDistri
       <div className="relative">
         <svg
           viewBox="60 25 355 375"
-          className="w-full max-w-lg mx-auto"
-          style={{ filter: "drop-shadow(0 2px 8px hsla(210, 30%, 10%, 0.08))" }}
+          className="w-full max-w-lg mx-auto rounded-xl overflow-hidden"
+          style={{ filter: "drop-shadow(0 4px 12px hsla(210, 30%, 10%, 0.12))" }}
         >
+          {/* Background satellite image */}
+          <image
+            href={rwandaMapImg}
+            x="60"
+            y="25"
+            width="355"
+            height="375"
+            preserveAspectRatio="xMidYMid slice"
+          />
+
+          {/* Clickable district overlays */}
           {Object.entries(districtPaths).map(([name, { path, cx, cy, province }]) => {
-            const colors = provinceColors[province];
             const isSelected = name === selectedDistrict;
             const isHovered = name === hoveredDistrict;
             const isProvinceMatch = province === selectedProvince;
@@ -91,13 +92,24 @@ export default function RwandaMap({ selectedDistrict, selectedProvince, onDistri
               <g key={name}>
                 <path
                   d={path}
-                  fill={isSelected ? colors.active : isHovered ? colors.hover : isProvinceMatch ? colors.hover : colors.fill}
-                  stroke="hsl(0, 0%, 100%)"
-                  strokeWidth={isSelected ? 2.5 : 1.5}
+                  fill={
+                    isSelected
+                      ? "hsla(152, 58%, 38%, 0.45)"
+                      : isHovered
+                        ? "hsla(205, 70%, 50%, 0.35)"
+                        : isProvinceMatch
+                          ? "hsla(205, 70%, 50%, 0.15)"
+                          : "hsla(0, 0%, 100%, 0.05)"
+                  }
+                  stroke={
+                    isSelected
+                      ? "hsla(0, 0%, 100%, 0.9)"
+                      : isHovered
+                        ? "hsla(0, 0%, 100%, 0.7)"
+                        : "hsla(0, 0%, 100%, 0.25)"
+                  }
+                  strokeWidth={isSelected ? 2 : 1}
                   className="cursor-pointer transition-all duration-200"
-                  style={{
-                    filter: isSelected ? `drop-shadow(0 0 6px ${colors.active})` : "none",
-                  }}
                   onClick={() => onDistrictSelect(name, province)}
                   onMouseEnter={() => setHoveredDistrict(name)}
                   onMouseLeave={() => setHoveredDistrict(null)}
@@ -108,9 +120,11 @@ export default function RwandaMap({ selectedDistrict, selectedProvince, onDistri
                   textAnchor="middle"
                   dominantBaseline="central"
                   className="pointer-events-none select-none"
-                  fontSize={isSelected ? 7 : 6}
-                  fontWeight={isSelected ? 700 : 500}
-                  fill={isSelected || isHovered ? "hsl(0, 0%, 100%)" : "hsl(210, 30%, 25%)"}
+                  fontSize={isSelected ? 7 : 5.5}
+                  fontWeight={isSelected ? 700 : 600}
+                  fill="hsl(0, 0%, 100%)"
+                  stroke="hsla(0, 0%, 0%, 0.5)"
+                  strokeWidth={0.3}
                   fontFamily="'Space Grotesk', sans-serif"
                 >
                   {name.length > 9 ? name.slice(0, 8) + "…" : name}
@@ -122,7 +136,7 @@ export default function RwandaMap({ selectedDistrict, selectedProvince, onDistri
 
         {/* Tooltip */}
         {hoveredDistrict && (
-          <div className="absolute top-2 right-2 bg-popover border border-border rounded-lg px-3 py-2 shadow-md animate-fade-in">
+          <div className="absolute top-2 right-2 bg-popover/95 backdrop-blur-sm border border-border rounded-lg px-3 py-2 shadow-lg animate-fade-in">
             <p className="text-xs text-muted-foreground">{districtPaths[hoveredDistrict].province}</p>
             <p className="font-display font-semibold text-sm text-foreground">{hoveredDistrict}</p>
           </div>
