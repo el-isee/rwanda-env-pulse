@@ -19,15 +19,15 @@ const variantClasses: Record<string, string> = {
 
 export default function MetricCard({ title, value, unit, icon: Icon, trend, trendValue, variant }: MetricCardProps) {
   return (
-    <div className="glass-card p-5 space-y-3">
+    <div className="glass-card p-5 space-y-3 group">
       <div className="flex items-center justify-between">
-        <span className="text-muted-foreground text-sm font-medium">{title}</span>
-        <div className={`p-2 rounded-lg ${variantClasses[variant]}`}>
+        <span className="text-muted-foreground text-xs font-medium uppercase tracking-wider">{title}</span>
+        <div className={`p-2 rounded-xl ${variantClasses[variant]} transition-transform group-hover:scale-110`}>
           <Icon className="h-4 w-4" />
         </div>
       </div>
-      <div className="flex items-baseline gap-1">
-        <span className="font-display text-2xl font-bold text-foreground">{value}</span>
+      <div className="flex items-baseline gap-1.5">
+        <span className="font-display text-3xl font-bold text-foreground tracking-tight">{value}</span>
         <span className="text-muted-foreground text-sm">{unit}</span>
       </div>
       {trend && (

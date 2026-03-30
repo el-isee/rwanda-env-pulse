@@ -1,5 +1,6 @@
 import { provinces, TimeRange } from "@/data/rwandaData";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { MapPin, Calendar } from "lucide-react";
 
 interface FiltersProps {
   province: string;
@@ -20,9 +21,14 @@ export default function Filters({ province, district, timeRange, onProvinceChang
   const districts = provinces[province] || [];
 
   return (
-    <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
+    <div className="glass-card p-4 flex flex-col sm:flex-row gap-4 items-start sm:items-center">
+      <div className="flex items-center gap-2 text-muted-foreground">
+        <MapPin className="h-4 w-4" />
+        <span className="text-xs font-medium uppercase tracking-wider">Location</span>
+      </div>
+
       <Select value={province} onValueChange={(v) => { onProvinceChange(v); onDistrictChange(provinces[v][0]); }}>
-        <SelectTrigger className="w-[200px] rounded-xl">
+        <SelectTrigger className="w-[180px] rounded-xl border-border">
           <SelectValue placeholder="Province" />
         </SelectTrigger>
         <SelectContent>
@@ -33,7 +39,7 @@ export default function Filters({ province, district, timeRange, onProvinceChang
       </Select>
 
       <Select value={district} onValueChange={onDistrictChange}>
-        <SelectTrigger className="w-[200px] rounded-xl">
+        <SelectTrigger className="w-[180px] rounded-xl border-border">
           <SelectValue placeholder="District" />
         </SelectTrigger>
         <SelectContent>
@@ -43,20 +49,23 @@ export default function Filters({ province, district, timeRange, onProvinceChang
         </SelectContent>
       </Select>
 
-      <div className="flex rounded-xl border bg-muted/50 p-1 gap-1">
-        {timeLabels.map((t) => (
-          <button
-            key={t.value}
-            onClick={() => onTimeRangeChange(t.value)}
-            className={`px-4 py-1.5 rounded-lg text-sm font-medium transition-all ${
-              timeRange === t.value
-                ? "bg-primary text-primary-foreground shadow-sm"
-                : "text-muted-foreground hover:text-foreground"
-            }`}
-          >
-            {t.label}
-          </button>
-        ))}
+      <div className="sm:ml-auto flex items-center gap-3">
+        <Calendar className="h-4 w-4 text-muted-foreground hidden sm:block" />
+        <div className="flex rounded-xl bg-muted/60 p-1 gap-0.5">
+          {timeLabels.map((t) => (
+            <button
+              key={t.value}
+              onClick={() => onTimeRangeChange(t.value)}
+              className={`px-4 py-1.5 rounded-lg text-sm font-medium transition-all ${
+                timeRange === t.value
+                  ? "bg-primary text-primary-foreground shadow-sm"
+                  : "text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              {t.label}
+            </button>
+          ))}
+        </div>
       </div>
     </div>
   );
