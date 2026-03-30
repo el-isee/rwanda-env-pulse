@@ -59,8 +59,6 @@ function RainDrops() {
           style={{
             left: `${Math.random() * 100}%`,
             height: `${12 + Math.random() * 20}px`,
-            animationDuration: `${0.4 + Math.random() * 0.4}s`,
-            animationDelay: `${Math.random() * 1}s`,
             animation: `rainFall ${0.4 + Math.random() * 0.4}s linear infinite`,
             animationDelay: `${Math.random() * 2}s`,
           }}
