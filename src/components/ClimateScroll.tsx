@@ -1,13 +1,19 @@
 import { useEffect, useRef, useState } from "react";
 import { Sun, Cloud, CloudRain, CloudLightning, Wind } from "lucide-react";
 
+import climateClear from "@/assets/climate-clear.jpg";
+import climateCloudy from "@/assets/climate-cloudy.jpg";
+import climateRain from "@/assets/climate-rain.jpg";
+import climateStorm from "@/assets/climate-storm.jpg";
+import climateWind from "@/assets/climate-wind.jpg";
+
 const scenes = [
   {
     id: "clear",
     label: "Clear Skies",
     subtitle: "Optimal conditions across Rwanda's highlands",
     icon: Sun,
-    bg: "from-sky-400 via-blue-300 to-cyan-200",
+    image: climateClear,
     particles: "sun",
     stat: "28°C Average",
   },
@@ -16,7 +22,7 @@ const scenes = [
     label: "Overcast",
     subtitle: "Cloud cover building across the western provinces",
     icon: Cloud,
-    bg: "from-slate-400 via-gray-400 to-slate-300",
+    image: climateCloudy,
     particles: "clouds",
     stat: "72% Humidity",
   },
@@ -25,7 +31,7 @@ const scenes = [
     label: "Heavy Rainfall",
     subtitle: "Seasonal rains sweeping through the eastern lowlands",
     icon: CloudRain,
-    bg: "from-slate-700 via-gray-600 to-slate-500",
+    image: climateRain,
     particles: "rain",
     stat: "45mm Rainfall",
   },
@@ -34,7 +40,7 @@ const scenes = [
     label: "Thunderstorm",
     subtitle: "Electrical storms detected — alerts active",
     icon: CloudLightning,
-    bg: "from-gray-900 via-slate-800 to-gray-700",
+    image: climateStorm,
     particles: "lightning",
     stat: "⚠ Severe Alert",
   },
@@ -43,7 +49,7 @@ const scenes = [
     label: "High Winds",
     subtitle: "Monitoring wind patterns for agricultural advisories",
     icon: Wind,
-    bg: "from-teal-600 via-emerald-500 to-green-400",
+    image: climateWind,
     particles: "wind",
     stat: "35 km/h Gusts",
   },
@@ -92,7 +98,6 @@ function LightningFlash() {
         style={{ background: "radial-gradient(ellipse at 40% 20%, white, transparent 70%)" }}
       />
       <RainDrops />
-      {/* Lightning bolt SVG */}
       <svg
         className={`absolute top-8 left-1/3 w-16 h-40 transition-opacity duration-75 ${flash ? "opacity-90" : "opacity-0"}`}
         viewBox="0 0 64 160"
@@ -118,18 +123,6 @@ function SunRays() {
           animation: "sunPulse 4s ease-in-out infinite",
         }}
       />
-      {Array.from({ length: 8 }).map((_, i) => (
-        <div
-          key={i}
-          className="absolute top-0 right-10 w-1 origin-bottom"
-          style={{
-            height: "200px",
-            background: "linear-gradient(to bottom, rgba(255,220,50,0.2), transparent)",
-            transform: `rotate(${i * 45}deg)`,
-            transformOrigin: "50% 0%",
-          }}
-        />
-      ))}
     </div>
   );
 }
@@ -211,16 +204,23 @@ export default function ClimateScroll() {
       className="relative"
       style={{ height: `${scenes.length * 100}vh` }}
     >
-      {/* Sticky viewport */}
       <div className="sticky top-0 h-screen overflow-hidden">
-        {/* Background transitions */}
+        {/* Real photo backgrounds */}
         {scenes.map((scene, i) => (
           <div
             key={scene.id}
-            className={`absolute inset-0 bg-gradient-to-br ${scene.bg} transition-opacity duration-1000 ${
+            className={`absolute inset-0 transition-opacity duration-1000 ${
               i === activeIndex ? "opacity-100" : "opacity-0"
             }`}
-          />
+          >
+            <img
+              src={scene.image}
+              alt={scene.label}
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+            {/* Dark overlay for text readability */}
+            <div className="absolute inset-0 bg-black/40" />
+          </div>
         ))}
 
         {/* Particles */}
@@ -253,15 +253,12 @@ export default function ClimateScroll() {
               {scenes[activeIndex].stat}
             </div>
 
-            {/* Scene indicators */}
             <div className="flex justify-center gap-2 pt-6">
               {scenes.map((s, i) => (
                 <div
                   key={s.id}
                   className={`h-1.5 rounded-full transition-all duration-500 ${
-                    i === activeIndex
-                      ? "w-8 bg-white"
-                      : "w-1.5 bg-white/30"
+                    i === activeIndex ? "w-8 bg-white" : "w-1.5 bg-white/30"
                   }`}
                 />
               ))}

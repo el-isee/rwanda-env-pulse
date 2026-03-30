@@ -7,6 +7,7 @@ import MetricCard from "@/components/dashboard/MetricCard";
 import RwandaMap from "@/components/dashboard/RwandaMap";
 import { TemperatureChart, HumidityChart, AirQualityChart, ComparisonChart } from "@/components/dashboard/Charts";
 import { provinces, getData, getDistrictComparisonData, TimeRange } from "@/data/rwandaData";
+import AnimatedBg from "@/components/dashboard/AnimatedBg";
 
 export default function Dashboard() {
   const [province, setProvince] = useState("Kigali City");
@@ -27,7 +28,8 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen relative">
+      <AnimatedBg />
       <Navbar />
       <main className="container pt-24 pb-16 space-y-8">
         <div className="space-y-1">
