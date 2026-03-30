@@ -28,7 +28,8 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen relative">
+      <AnimatedBg />
       <Navbar />
       <main className="container pt-24 pb-16 space-y-8">
         <div className="space-y-1">
