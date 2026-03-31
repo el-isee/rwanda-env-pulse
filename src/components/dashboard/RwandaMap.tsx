@@ -10,44 +10,44 @@ interface RwandaMapProps {
 // District hotspots positioned relative to the reference map image (percentage-based)
 const districtHotspots: Record<string, { x: number; y: number; province: string }> = {
   // Kigali City
-  Gasabo:      { x: 58.5, y: 48, province: "Kigali City" },
-  Kicukiro:    { x: 57, y: 55, province: "Kigali City" },
-  Nyarugenge:  { x: 52, y: 52, province: "Kigali City" },
+  Gasabo:      { x: 56, y: 41, province: "Kigali City" },
+  Kicukiro:    { x: 55, y: 49, province: "Kigali City" },
+  Nyarugenge:  { x: 51, y: 46, province: "Kigali City" },
 
   // Northern
-  Burera:      { x: 47, y: 14, province: "Northern" },
-  Musanze:     { x: 37, y: 18, province: "Northern" },
-  Gicumbi:     { x: 56, y: 22, province: "Northern" },
-  Gakenke:     { x: 44, y: 28, province: "Northern" },
-  Rulindo:     { x: 53, y: 33, province: "Northern" },
+  Burera:      { x: 44, y: 15, province: "Northern" },
+  Musanze:     { x: 37, y: 20, province: "Northern" },
+  Gicumbi:     { x: 54, y: 24, province: "Northern" },
+  Gakenke:     { x: 43, y: 30, province: "Northern" },
+  Rulindo:     { x: 50, y: 34, province: "Northern" },
 
   // Southern
-  Muhanga:     { x: 43, y: 52, province: "Southern" },
-  Kamonyi:     { x: 49, y: 58, province: "Southern" },
-  Ruhango:     { x: 46, y: 65, province: "Southern" },
-  Nyanza:      { x: 50, y: 72, province: "Southern" },
-  Huye:        { x: 44, y: 80, province: "Southern" },
-  Gisagara:    { x: 50, y: 86, province: "Southern" },
-  Nyaruguru:   { x: 38, y: 90, province: "Southern" },
-  Nyamagabe:   { x: 35, y: 76, province: "Southern" },
+  Muhanga:     { x: 43, y: 48, province: "Southern" },
+  Kamonyi:     { x: 49, y: 53, province: "Southern" },
+  Ruhango:     { x: 43, y: 59, province: "Southern" },
+  Nyanza:      { x: 49, y: 64, province: "Southern" },
+  Huye:        { x: 40, y: 72, province: "Southern" },
+  Gisagara:    { x: 46, y: 78, province: "Southern" },
+  Nyaruguru:   { x: 37, y: 83, province: "Southern" },
+  Nyamagabe:   { x: 32, y: 70, province: "Southern" },
 
   // Eastern
-  Rwamagana:   { x: 66, y: 52, province: "Eastern" },
-  Bugesera:    { x: 60, y: 67, province: "Eastern" },
-  Ngoma:       { x: 73, y: 63, province: "Eastern" },
-  Kirehe:      { x: 83, y: 63, province: "Eastern" },
-  Kayonza:     { x: 76, y: 44, province: "Eastern" },
-  Gatsibo:     { x: 72, y: 28, province: "Eastern" },
-  Nyagatare:   { x: 76, y: 12, province: "Eastern" },
+  Rwamagana:   { x: 64, y: 47, province: "Eastern" },
+  Bugesera:    { x: 58, y: 60, province: "Eastern" },
+  Ngoma:       { x: 72, y: 58, province: "Eastern" },
+  Kirehe:      { x: 83, y: 57, province: "Eastern" },
+  Kayonza:     { x: 75, y: 42, province: "Eastern" },
+  Gatsibo:     { x: 73, y: 28, province: "Eastern" },
+  Nyagatare:   { x: 78, y: 12, province: "Eastern" },
 
   // Western
-  Rubavu:      { x: 23, y: 25, province: "Western" },
-  Nyabihu:     { x: 31, y: 32, province: "Western" },
-  Ngororero:   { x: 37, y: 42, province: "Western" },
-  Rutsiro:     { x: 24, y: 42, province: "Western" },
-  Karongi:     { x: 27, y: 58, province: "Western" },
-  Nyamasheke:  { x: 18, y: 70, province: "Western" },
-  Rusizi:      { x: 20, y: 85, province: "Western" },
+  Rubavu:      { x: 24, y: 24, province: "Western" },
+  Nyabihu:     { x: 30, y: 30, province: "Western" },
+  Ngororero:   { x: 36, y: 40, province: "Western" },
+  Rutsiro:     { x: 22, y: 38, province: "Western" },
+  Karongi:     { x: 24, y: 55, province: "Western" },
+  Nyamasheke:  { x: 18, y: 68, province: "Western" },
+  Rusizi:      { x: 16, y: 80, province: "Western" },
 };
 
 const provinceColors: Record<string, string> = {
