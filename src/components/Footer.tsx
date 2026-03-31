@@ -33,8 +33,8 @@ export default function Footer() {
           </div>
 
           <div className="space-y-3">
-            <p className="font-display font-semibold text-foreground text-sm">Data Sources</p>
-            <div className="flex flex-col gap-2 text-sm text-muted-foreground">
+            <p className="font-display font-semibold text-white text-sm">Data Sources</p>
+            <div className="flex flex-col gap-2 text-sm text-white/60">
               <span>IoT Sensor Network</span>
               <span>Rwanda Met Service</span>
               <span>REMA Database</span>
