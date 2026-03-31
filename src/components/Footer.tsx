@@ -17,7 +17,7 @@ export default function Footer() {
           </div>
 
           <div className="space-y-3">
-            <p className="font-display font-semibold text-foreground text-sm">Quick Links</p>
+            <p className="font-display font-semibold text-white text-sm">Quick Links</p>
             <div className="flex flex-col gap-2">
               {[
                 { to: "/", label: "Home" },
