@@ -1,4 +1,5 @@
 import { Thermometer, Droplets, Wind, MapPin } from "lucide-react";
+import climateClear from "@/assets/climate-clear.jpg";
 
 const features = [
   { icon: Thermometer, title: "Temperature Tracking", desc: "Real-time temperature data across all 30 districts with trend analysis.", color: "bg-destructive/10 text-destructive" },
@@ -9,7 +10,10 @@ const features = [
 
 export default function Features() {
   return (
-    <section className="py-28 container">
+    <section className="relative py-28 overflow-hidden">
+      <img src={climateClear} alt="" className="absolute inset-0 w-full h-full object-cover" />
+      <div className="absolute inset-0 bg-background/85 backdrop-blur-sm" />
+      <div className="container relative z-10">
       <div className="text-center mb-16 space-y-3">
         <p className="text-sm font-semibold uppercase tracking-widest text-primary">What We Track</p>
         <h2 className="font-display text-3xl sm:text-4xl font-bold text-foreground tracking-tight">
