@@ -91,27 +91,27 @@ export default function RwandaMap({ selectedDistrict, selectedProvince, onDistri
           return (
             <button
               key={name}
-              className="absolute transform -translate-x-1/2 -translate-y-1/2 rounded-full transition-all duration-200 cursor-pointer focus:outline-none"
+              className={`absolute transform -translate-x-1/2 -translate-y-1/2 rounded-full transition-all duration-200 cursor-pointer focus:outline-none ${!isSelected && !isHovered ? 'animate-pulse' : ''}`}
               style={{
                 left: `${x}%`,
                 top: `${y}%`,
-                width: isSelected ? 20 : isHovered ? 16 : 12,
-                height: isSelected ? 20 : isHovered ? 16 : 12,
+              width: isSelected ? 22 : isHovered ? 18 : 14,
+                height: isSelected ? 22 : isHovered ? 18 : 14,
                 backgroundColor: isSelected
-                  ? "hsla(152, 58%, 38%, 0.9)"
+                  ? "hsla(152, 58%, 38%, 0.95)"
                   : isHovered
-                    ? "hsla(205, 70%, 50%, 0.7)"
-                    : "hsla(0, 0%, 100%, 0.35)",
+                    ? "hsla(205, 70%, 50%, 0.8)"
+                    : "hsla(152, 50%, 45%, 0.7)",
                 border: isSelected
-                  ? "2px solid white"
+                  ? "2.5px solid white"
                   : isHovered
-                    ? "2px solid hsla(0,0%,100%,0.8)"
-                    : "1.5px solid hsla(0,0%,100%,0.5)",
+                    ? "2.5px solid hsla(0,0%,100%,0.9)"
+                    : "2px solid hsla(0,0%,100%,0.7)",
                 boxShadow: isSelected
-                  ? "0 0 10px hsla(152, 58%, 38%, 0.6)"
+                  ? "0 0 12px hsla(152, 58%, 38%, 0.7)"
                   : isHovered
-                    ? "0 0 8px hsla(205, 70%, 50%, 0.4)"
-                    : "none",
+                    ? "0 0 10px hsla(205, 70%, 50%, 0.5)"
+                    : "0 0 6px hsla(152, 50%, 45%, 0.4)",
               }}
               onClick={() => onDistrictSelect(name, province)}
               onMouseEnter={() => setHoveredDistrict(name)}
