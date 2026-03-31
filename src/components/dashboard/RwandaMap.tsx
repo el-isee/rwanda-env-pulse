@@ -91,7 +91,7 @@ export default function RwandaMap({ selectedDistrict, selectedProvince, onDistri
           return (
             <button
               key={name}
-              className="absolute transform -translate-x-1/2 -translate-y-1/2 rounded-full transition-all duration-200 cursor-pointer focus:outline-none"
+              className={`absolute transform -translate-x-1/2 -translate-y-1/2 rounded-full transition-all duration-200 cursor-pointer focus:outline-none ${!isSelected && !isHovered ? 'animate-pulse' : ''}`}
               style={{
                 left: `${x}%`,
                 top: `${y}%`,
