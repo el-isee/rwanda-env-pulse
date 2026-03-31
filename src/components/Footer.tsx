@@ -42,8 +42,8 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-10 pt-6 border-t border-border text-center">
-          <p className="text-muted-foreground/60 text-xs">
+        <div className="mt-10 pt-6 border-t border-white/10 text-center">
+          <p className="text-white/40 text-xs">
             © {new Date().getFullYear()} Rwanda Environmental Monitoring. All rights reserved.
           </p>
         </div>
