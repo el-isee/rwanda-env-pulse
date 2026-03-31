@@ -11,7 +11,7 @@ export default function Footer() {
               <Leaf className="h-5 w-5" />
               REM Dashboard
             </div>
-            <p className="text-muted-foreground text-sm leading-relaxed max-w-xs">
+            <p className="text-white/60 text-sm leading-relaxed max-w-xs">
               Built for the Rwanda Smart Monitoring Initiative. Empowering data-driven environmental decisions.
             </p>
           </div>
