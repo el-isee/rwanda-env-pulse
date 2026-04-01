@@ -5,6 +5,8 @@ import Footer from "@/components/Footer";
 import Filters from "@/components/dashboard/Filters";
 import MetricCard from "@/components/dashboard/MetricCard";
 import RwandaMap from "@/components/dashboard/RwandaMap";
+import DistrictSearch from "@/components/dashboard/DistrictSearch";
+import WeatherAlerts from "@/components/dashboard/WeatherAlerts";
 import { TemperatureChart, HumidityChart, AirQualityChart, ComparisonChart } from "@/components/dashboard/Charts";
 import { provinces, getData, getDistrictComparisonData, TimeRange } from "@/data/rwandaData";
 import AnimatedBg from "@/components/dashboard/AnimatedBg";
@@ -32,14 +34,25 @@ export default function Dashboard() {
       <AnimatedBg />
       <Navbar />
       <main className="container pt-24 pb-16 space-y-8">
-        <div className="space-y-1">
-          <h1 className="font-display text-3xl font-bold text-foreground tracking-tight">
-            Environmental Dashboard
-          </h1>
-          <p className="text-muted-foreground">
-            Real-time environmental data for <span className="font-medium text-foreground">{district}</span>, {province}
-          </p>
+        <div className="flex flex-col sm:flex-row sm:items-end gap-4 justify-between">
+          <div className="space-y-1">
+            <h1 className="font-display text-3xl font-bold text-foreground tracking-tight">
+              Environmental Dashboard
+            </h1>
+            <p className="text-muted-foreground">
+              Real-time environmental data for <span className="font-medium text-foreground">{district}</span>, {province}
+            </p>
+          </div>
+          <DistrictSearch onDistrictSelect={handleMapDistrictSelect} />
         </div>
+
+        <WeatherAlerts
+          district={district}
+          avgTemp={parseFloat(avgTemp)}
+          avgHumidity={parseFloat(avgHumidity)}
+          maxTemp={parseFloat(maxTemp)}
+          airQuality={data.reduce((s, d) => s + d.airQuality, 0) / data.length}
+        />
 
         <Filters
           province={province}
