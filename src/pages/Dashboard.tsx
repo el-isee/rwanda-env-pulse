@@ -9,6 +9,9 @@ import DistrictSearch from "@/components/dashboard/DistrictSearch";
 import WeatherAlerts from "@/components/dashboard/WeatherAlerts";
 import { TemperatureChart, HumidityChart, AirQualityChart, ComparisonChart } from "@/components/dashboard/Charts";
 import WeatherForecast from "@/components/dashboard/WeatherForecast";
+import ProvinceSummaryCards from "@/components/dashboard/ProvinceSummaryCards";
+import HistoricalComparison from "@/components/dashboard/HistoricalComparison";
+import AlertsPanel from "@/components/dashboard/AlertsPanel";
 import { provinces, getData, getDistrictComparisonData, TimeRange } from "@/data/rwandaData";
 import AnimatedBg from "@/components/dashboard/AnimatedBg";
 
@@ -24,10 +27,16 @@ export default function Dashboard() {
   const avgHumidity = (data.reduce((s, d) => s + d.humidity, 0) / data.length).toFixed(1);
   const maxTemp = Math.max(...data.map((d) => d.temp)).toFixed(1);
   const minTemp = Math.min(...data.map((d) => d.temp)).toFixed(1);
+  const avgAirQuality = data.reduce((s, d) => s + d.airQuality, 0) / data.length;
 
   const handleMapDistrictSelect = (d: string, p: string) => {
     setProvince(p);
     setDistrict(d);
+  };
+
+  const handleProvinceSelect = (p: string) => {
+    setProvince(p);
+    setDistrict(provinces[p][0]);
   };
 
   return (
@@ -52,7 +61,13 @@ export default function Dashboard() {
           avgTemp={parseFloat(avgTemp)}
           avgHumidity={parseFloat(avgHumidity)}
           maxTemp={parseFloat(maxTemp)}
-          airQuality={data.reduce((s, d) => s + d.airQuality, 0) / data.length}
+          airQuality={avgAirQuality}
+        />
+
+        {/* Province Summary Cards */}
+        <ProvinceSummaryCards
+          selectedProvince={province}
+          onProvinceSelect={handleProvinceSelect}
         />
 
         <Filters
@@ -71,17 +86,29 @@ export default function Dashboard() {
           <MetricCard title="Lowest Recorded" value={minTemp} unit="°C" icon={TrendingDown} variant="normal" />
         </div>
 
-        {/* Map + Comparison side by side */}
+        {/* Map + Alerts Panel */}
         <div className="grid lg:grid-cols-2 gap-6">
           <RwandaMap
             selectedDistrict={district}
             selectedProvince={province}
             onDistrictSelect={handleMapDistrictSelect}
           />
-          <ComparisonChart data={comparison} />
+          <AlertsPanel
+            district={district}
+            avgTemp={parseFloat(avgTemp)}
+            avgHumidity={parseFloat(avgHumidity)}
+            maxTemp={parseFloat(maxTemp)}
+            airQuality={avgAirQuality}
+          />
         </div>
 
+        {/* District Comparison */}
+        <ComparisonChart data={comparison} />
+
         <WeatherForecast district={district} />
+
+        {/* Historical Comparison */}
+        <HistoricalComparison district={district} timeRange={timeRange} />
 
         <div className="grid lg:grid-cols-2 gap-6">
           <TemperatureChart data={data} />
