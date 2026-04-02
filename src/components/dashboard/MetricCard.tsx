@@ -1,4 +1,5 @@
 import { LucideIcon, TrendingUp, TrendingDown } from "lucide-react";
+import { useAnimatedCounter } from "@/hooks/useAnimatedCounter";
 
 interface MetricCardProps {
   title: string;
@@ -18,6 +19,10 @@ const variantClasses: Record<string, string> = {
 };
 
 export default function MetricCard({ title, value, unit, icon: Icon, trend, trendValue, variant }: MetricCardProps) {
+  const numericValue = parseFloat(value);
+  const animated = useAnimatedCounter(numericValue);
+  const decimals = value.includes(".") ? value.split(".")[1].length : 0;
+
   return (
     <div className="glass-card p-5 space-y-3 group">
       <div className="flex items-center justify-between">
@@ -27,7 +32,9 @@ export default function MetricCard({ title, value, unit, icon: Icon, trend, tren
         </div>
       </div>
       <div className="flex items-baseline gap-1.5">
-        <span className="font-display text-3xl font-bold text-foreground tracking-tight">{value}</span>
+        <span className="font-display text-3xl font-bold text-foreground tracking-tight">
+          {animated.toFixed(decimals)}
+        </span>
         <span className="text-muted-foreground text-sm">{unit}</span>
       </div>
       {trend && (

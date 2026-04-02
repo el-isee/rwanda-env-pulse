@@ -8,6 +8,7 @@ import RwandaMap from "@/components/dashboard/RwandaMap";
 import DistrictSearch from "@/components/dashboard/DistrictSearch";
 import WeatherAlerts from "@/components/dashboard/WeatherAlerts";
 import { TemperatureChart, HumidityChart, AirQualityChart, ComparisonChart } from "@/components/dashboard/Charts";
+import WeatherForecast from "@/components/dashboard/WeatherForecast";
 import { provinces, getData, getDistrictComparisonData, TimeRange } from "@/data/rwandaData";
 import AnimatedBg from "@/components/dashboard/AnimatedBg";
 
@@ -79,6 +80,8 @@ export default function Dashboard() {
           />
           <ComparisonChart data={comparison} />
         </div>
+
+        <WeatherForecast district={district} />
 
         <div className="grid lg:grid-cols-2 gap-6">
           <TemperatureChart data={data} />
