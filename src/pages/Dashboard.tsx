@@ -81,6 +81,8 @@ export default function Dashboard() {
           <ComparisonChart data={comparison} />
         </div>
 
+        <WeatherForecast district={district} />
+
         <div className="grid lg:grid-cols-2 gap-6">
           <TemperatureChart data={data} />
           <HumidityChart data={data} />
