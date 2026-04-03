@@ -15,6 +15,7 @@ import AlertsPanel from "@/components/dashboard/AlertsPanel";
 import DataExport from "@/components/dashboard/DataExport";
 import EnvironmentalTips from "@/components/dashboard/EnvironmentalTips";
 import LastUpdated from "@/components/dashboard/LastUpdated";
+import BookmarkDistricts from "@/components/dashboard/BookmarkDistricts";
 import { provinces, getData, getDistrictComparisonData, TimeRange } from "@/data/rwandaData";
 import AnimatedBg from "@/components/dashboard/AnimatedBg";
 
@@ -62,6 +63,12 @@ export default function Dashboard() {
             <DistrictSearch onDistrictSelect={handleMapDistrictSelect} />
           </div>
         </div>
+
+        <BookmarkDistricts
+          currentDistrict={district}
+          currentProvince={province}
+          onDistrictSelect={handleMapDistrictSelect}
+        />
 
         <WeatherAlerts
           district={district}
