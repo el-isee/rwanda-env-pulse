@@ -64,6 +64,12 @@ export default function Dashboard() {
           </div>
         </div>
 
+        <BookmarkDistricts
+          currentDistrict={district}
+          currentProvince={province}
+          onDistrictSelect={handleMapDistrictSelect}
+        />
+
         <WeatherAlerts
           district={district}
           avgTemp={parseFloat(avgTemp)}
