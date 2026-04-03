@@ -125,6 +125,13 @@ export default function Dashboard() {
         <div className="grid lg:grid-cols-1 gap-6">
           <AirQualityChart data={data} />
         </div>
+
+        <EnvironmentalTips
+          avgTemp={parseFloat(avgTemp)}
+          avgHumidity={parseFloat(avgHumidity)}
+          airQuality={avgAirQuality}
+          maxTemp={parseFloat(maxTemp)}
+        />
       </main>
       <Footer />
     </div>

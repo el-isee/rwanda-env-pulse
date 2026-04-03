@@ -143,6 +143,9 @@
     background: hsla(200, 20%, 98%, 0.8);
     border-bottom: 1px solid var(--glass-border);
   }
+  .dark .nav-blur {
+    background: hsla(220, 18%, 10%, 0.85);
+  }
 }
 
 @layer utilities {
