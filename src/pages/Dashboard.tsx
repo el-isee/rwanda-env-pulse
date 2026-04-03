@@ -56,7 +56,11 @@ export default function Dashboard() {
               Real-time environmental data for <span className="font-medium text-foreground">{district}</span>, {province}
             </p>
           </div>
-          <DistrictSearch onDistrictSelect={handleMapDistrictSelect} />
+          <div className="flex items-center gap-3">
+            <LastUpdated />
+            <DataExport data={data} district={district} timeRange={timeRange} />
+            <DistrictSearch onDistrictSelect={handleMapDistrictSelect} />
+          </div>
         </div>
 
         <WeatherAlerts
