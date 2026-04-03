@@ -12,6 +12,9 @@ import WeatherForecast from "@/components/dashboard/WeatherForecast";
 import ProvinceSummaryCards from "@/components/dashboard/ProvinceSummaryCards";
 import HistoricalComparison from "@/components/dashboard/HistoricalComparison";
 import AlertsPanel from "@/components/dashboard/AlertsPanel";
+import DataExport from "@/components/dashboard/DataExport";
+import EnvironmentalTips from "@/components/dashboard/EnvironmentalTips";
+import LastUpdated from "@/components/dashboard/LastUpdated";
 import { provinces, getData, getDistrictComparisonData, TimeRange } from "@/data/rwandaData";
 import AnimatedBg from "@/components/dashboard/AnimatedBg";
 
