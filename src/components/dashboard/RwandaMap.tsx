@@ -57,7 +57,7 @@ export default function RwandaMap({ selectedDistrict, selectedProvince, onDistri
   const [hoveredDistrict, setHoveredDistrict] = useState<string | null>(null);
 
   const selected = districtData[selectedDistrict] || { lat: -1.9403, lng: 29.8739 };
-  const mapSrc = `https://www.google.com/maps/embed/v1/view?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&center=${selected.lat},${selected.lng}&zoom=12&maptype=satellite`;
+  const mapSrc = `https://maps.google.com/maps?q=${selected.lat},${selected.lng}&z=12&t=k&output=embed`;
 
   return (
     <div className="glass-card p-6 space-y-4">
